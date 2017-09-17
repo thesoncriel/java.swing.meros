@@ -8,6 +8,7 @@
 * Java 6
 * Swing
 * XML 및 Text 출력 지원
+* JFreeChart를 이용한 그래프 출력
 
 ## Licence
 MIT
