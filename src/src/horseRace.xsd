@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+	<xsd:element name="horseRace">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="header"/>
+				<xsd:element ref="body"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="header">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="author" type="xsd:string" default="TheSON -_-v"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="body">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="players"/>
+				<xsd:element ref="horses"/>
+				<xsd:element ref="results"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+<!-- players, horses, results 정의 부분. 이 노드들은 여러개의 player, horse, result 자식 노드를 가짐-->
+	<xsd:element name="players">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="player" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="horses">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="horse" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="results">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="result" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+<!-- 데이터 개체 선언 부분 -->
+	<xsd:element name="player">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="member">
+					<xsd:sequence>
+						<xsd:element name="hId" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="horse">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="member">
+					<xsd:sequence>
+						<xsd:element name="nick" type="xsd:string"/>
+						<xsd:element name="type" type="horseType" default="GermanHolstein"/>
+					</xsd:sequence>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="result">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="xsd:string"/>
+				<xsd:element name="date" type="xsd:date"/>
+				<xsd:element name="betRate" type="xsd:double"/>
+				<xsd:element name="winRate" type="xsd:double"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+<!-- Member 정의 부분 -->
+	<xsd:complexType name="member">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="age" type="xsd:int" default="0"/>
+			<xsd:element name="gender" type="xsd:boolean" default="1"/>
+			<xsd:element name="height" type="xsd:double" default="0.0"/>
+			<xsd:element name="weight" type="xsd:double" default="0.0"/>
+			<xsd:element name="picURL" type="xsd:string"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string" use="required"/>
+	</xsd:complexType>
+<!-- HorseType 정의 부분 -->
+	<xsd:simpleType name="horseType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AmericanQuarter"/>
+			<xsd:enumeration value="AmericanSaddle"/>
+			<xsd:enumeration value="AngloArab"/>
+			<xsd:enumeration value="Appaloosa"/>
+			<xsd:enumeration value="Arabian"/>
+			<xsd:enumeration value="Asian"/>
+			<xsd:enumeration value="ClevelandBay"/>
+			<xsd:enumeration value="EnglishHackney"/>
+			<xsd:enumeration value="GermanHolstein"/>
+			<xsd:enumeration value="Hanoverian"/>
+			<xsd:enumeration value="Lipizzaner"/>
+			<xsd:enumeration value="MissouriFoxTrotting"/>
+			<xsd:enumeration value="Morgan"/>
+			<xsd:enumeration value="Noriker"/>
+			<xsd:enumeration value="Percheron"/>
+			<xsd:enumeration value="Shire"/>
+			<xsd:enumeration value="StandardBred"/>
+			<xsd:enumeration value="Suffolk"/>
+			<xsd:enumeration value="TennesseeWalking"/>
+			<xsd:enumeration value="ThoroughBred"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+<!-- HorseTypeKor 정의 부분 -->
+	<xsd:simpleType name="horseTypeKor">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="아메리칸쿼터호스"/>
+			<xsd:enumeration value="아메리칸새들호스"/>
+			<xsd:enumeration value="앵글로아랍"/>
+			<xsd:enumeration value="아팔루사"/>
+			<xsd:enumeration value="아라비안"/>
+			<xsd:enumeration value="아시안"/>
+			<xsd:enumeration value="클리블랜드베이"/>
+			<xsd:enumeration value="잉글리시해크니"/>
+			<xsd:enumeration value="저먼홀슈타인"/>
+			<xsd:enumeration value="하노베리안"/>
+			<xsd:enumeration value="리피차너"/>
+			<xsd:enumeration value="미주리폭스트로팅호스"/>
+			<xsd:enumeration value="모건"/>
+			<xsd:enumeration value="노리커"/>
+			<xsd:enumeration value="페르슈롱"/>
+			<xsd:enumeration value="샤이어"/>
+			<xsd:enumeration value="스탠더드브레드"/>
+			<xsd:enumeration value="서퍽"/>
+			<xsd:enumeration value="테네시워킹호스"/>
+			<xsd:enumeration value="서러브레드"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
